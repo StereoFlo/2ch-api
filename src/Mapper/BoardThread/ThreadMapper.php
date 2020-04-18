@@ -2,6 +2,7 @@
 
 namespace App\Mapper\BoardThread;
 
+use DomainException;
 use Phpach\Thread\Thread;
 
 class ThreadMapper
@@ -9,14 +10,17 @@ class ThreadMapper
     public static function map(Thread $thread): array
     {
         $res = [
-            'title' => $thread->getTitle(),
-            'post_count' => $thread->getPostCount(),
+            'title'          => $thread->getTitle(),
+            'id'             => $thread->getBoardId(),
+            'name'           => $thread->getBoardName(),
+            'info'           => $thread->getBoardName(),
+            'post_count'     => $thread->getPostCount(),
             'unique_posters' => $thread->getUniquePosters(),
-            'thread_count' => $thread->count(),
+            'thread_count'   => $thread->count(),
         ];
 
         if ($thread->count() > 1) {
-            throw new \DomainException('check thread count');
+            throw new DomainException('check thread count');
         }
 
         $threads = $thread->getThreads();
@@ -26,11 +30,11 @@ class ThreadMapper
         if ($threads[0]->count()) {
             foreach ($threads[0]->getPosts() as $post) {
                 $posts[] = [
-                    'id' => $post->getNumber(),
-                    'num' => $post->getNum(),
-                    'name' => $post->getName(),
+                    'id'      => $post->getNumber(),
+                    'num'     => $post->getNum(),
+                    'name'    => $post->getName(),
                     'comment' => $post->getComment(),
-                    'files' => FileListMapper::map($post->getFiles()),
+                    'files'   => FileListMapper::map($post->getFiles()),
                 ];
             }
         }
