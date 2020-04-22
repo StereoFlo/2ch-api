@@ -2,7 +2,6 @@
 
 namespace App\Mapper\BoardList;
 
-use App\Mapper\BoardList\CategoryMapper;
 use function array_map;
 
 class CategoryListMapper
