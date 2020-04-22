@@ -23,10 +23,10 @@ class Board extends AbstractController
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(BoardMapper $boardMapper, string $id): JsonResponse
     {
         $board = $this->phpach->getAllThreadsInBoard($id);
 
-        return JsonResponse::create(BoardMapper::map($board));
+        return JsonResponse::create($boardMapper->map($board));
     }
 }

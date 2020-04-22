@@ -6,7 +6,12 @@ use Phpach\Threads\Board;
 
 class BoardMapper
 {
-    public static function map(Board $board)
+    public function map(Board $board)
+    {
+        return $this->doMapping($board);
+    }
+
+    protected function doMapping(Board $board): array
     {
         return [
             'id' => $board->getId(),
