@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Mapper\BoardList\CategoryListMapper;
+use App\Mapper\BoardList\CategoryMapper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -23,10 +23,10 @@ class BoardList extends AbstractController
      * @throws ServerExceptionInterface
      * @throws TransportExceptionInterface
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(CategoryMapper $categoryMapper): JsonResponse
     {
         $boards = $this->phpach->getAllBoards();
 
-        return JsonResponse::create(CategoryListMapper::map($boards));
+        return JsonResponse::create($categoryMapper->mapCollection($boards));
     }
 }
