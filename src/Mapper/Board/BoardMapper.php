@@ -6,6 +6,16 @@ use Phpach\Threads\Board;
 
 class BoardMapper
 {
+    /**
+     * @var ThreadMapper
+     */
+    private $threadMapper;
+
+    public function __construct(ThreadMapper $threadMapper)
+    {
+        $this->threadMapper = $threadMapper;
+    }
+
     public function map(Board $board)
     {
         return $this->doMapping($board);
@@ -14,9 +24,9 @@ class BoardMapper
     protected function doMapping(Board $board): array
     {
         return [
-            'id' => $board->getId(),
+            'id'            => $board->getId(),
             'threads_count' => $board->count(),
-            'threads' => ThreadListMapper::map($board->getThreads())
+            'threads'       => $this->threadMapper->mapCollection($board->getThreads())
         ];
     }
 }
