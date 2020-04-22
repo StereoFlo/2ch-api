@@ -6,6 +6,16 @@ use Phpach\Boards\Category;
 
 class CategoryMapper
 {
+    /**
+     * @var BoardMapper
+     */
+    private $boardMapper;
+
+    public function __construct(BoardMapper $boardMapper)
+    {
+        $this->boardMapper = $boardMapper;
+    }
+
     public function map(Category $category): array
     {
         return $this->doMapping($category);
@@ -21,7 +31,7 @@ class CategoryMapper
         return [
             'name'        => $category->getName(),
             'board_count' => $category->count(),
-            'boards'      => BoardListMapper::map($category->getBoards())
+            'boards'      => $this->boardMapper->mapCollection($category->getBoards())
         ];
     }
 }

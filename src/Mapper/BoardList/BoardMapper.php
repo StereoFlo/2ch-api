@@ -6,11 +6,21 @@ use Phpach\Boards\Board;
 
 class BoardMapper
 {
-    public static function map(Board $board): array
+    public function map(Board $board): array
+    {
+        return $this->doMapping($board);
+    }
+
+    public function mapCollection(array $boards): array
+    {
+        return array_map([BoardMapper::class, 'doMapping'], $boards);
+    }
+
+    protected function doMapping(Board $board): array
     {
         return [
-            'id'       => $board->getId(),
-            'name'     => $board->getName()
+            'id'   => $board->getId(),
+            'name' => $board->getName()
         ];
     }
 }
