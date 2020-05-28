@@ -23,6 +23,14 @@ class ThreadRepository
         $this->entityManager->flush();
     }
 
+    /**
+     * @return Thread[]
+     */
+    public function getActive(): ?array
+    {
+        return $this->entityManager->getRepository(Thread::class)->findBy(['isArchived' => false]);
+    }
+
     public function getByThreadId(string $threadId): ?Thread
     {
         return $this->entityManager->getRepository(Thread::class)->findOneBy(['threadId' => $threadId]);
