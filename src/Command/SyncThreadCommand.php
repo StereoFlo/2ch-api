@@ -10,6 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function date;
 
 class SyncThreadCommand extends Command
 {
@@ -54,6 +55,7 @@ class SyncThreadCommand extends Command
             return 0;
         }
 
+        $count = 0;
         $toSave = [];
         foreach ($threads as $thread) {
             $threadsTmp = null;
@@ -88,9 +90,14 @@ class SyncThreadCommand extends Command
                 }
             }
             $toSave[] = $thread;
+            $count++;
+            if ($count === 100) {
+                $count = 0;
+                $toSave = [];
+                $this->threadRepos->save($toSave);
+            }
         }
 
-        $this->threadRepos->save($toSave);
         return 0;
     }
 }

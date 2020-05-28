@@ -69,6 +69,7 @@ class ImportThreadCommand extends Command
                     $count++;
                     if ($count === 10) {
                         $count = 0;
+                        $toSave = [];
                         $this->threadRepos->save($toSave);
                         print "OK\n";
                     }
