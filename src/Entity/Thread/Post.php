@@ -31,98 +31,98 @@ class Post
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $lasthit;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $name;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $banned;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $closed;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $date;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $num;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $number;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $parent;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $sticky;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $subject;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $tags;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $timestamp;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $trip;
 
@@ -133,25 +133,24 @@ class Post
      */
     private $files;
 
-    public function __construct(Thread $thread, array $post)
+    public function __construct(Thread $thread, \Phpach\Thread\Post $post)
     {
         $this->thread = $thread;
-        $this->name = $post['name'] ?? null;
-        $this->banned = $post['banned'] ?? null;
-        $this->closed = $post['closed'] ?? null;
-        $this->comment = $post['comment'] ?? null;
-        $this->date = $post['date'] ?? null;
-        $this->lasthit = $post['lasthit'] ?? null;
-        $this->num = $post['num'] ?? null;
-        $this->number = $post['number'] ?? null;
-        $this->op = $post['op'] ?? null;
-        $this->parent = $post['parent'] ?? null;
-        $this->sticky = $post['sticky'] ?? null;
-        $this->subject = $post['subject'] ?? null;
-        $this->tags = $post['tags'] ?? null;
-        $this->timestamp = $post['timestamp'] ?? null;
-        $this->trip = $post['trip'] ?? null;
-        $this->setFiles($post['files'] ?? null);
+        $this->name = $post->getName();
+        $this->banned = $post->getBanned();
+        $this->closed = $post->getClosed();
+        $this->comment = $post->getComment();
+        $this->date = $post->getDate();
+        $this->lasthit = $post->getLasthit();
+        $this->num = $post->getNum();
+        $this->number = $post->getNumber();
+        $this->parent = $post->getParent();
+        $this->sticky = $post->getSticky();
+        $this->subject = $post->getSubject();
+        //$this->tags = $post->getTags();
+        $this->timestamp = $post->getTimestamp();
+        $this->trip = $post->getTrip();
+        $this->setFiles($post->getFiles());
     }
 
     /**
@@ -290,6 +289,9 @@ class Post
         return $this->files;
     }
 
+    /**
+     * @param \Phpach\Thread\File[]|null $files
+     */
     private function setFiles(?array $files): void
     {
         if ($files) {

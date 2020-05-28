@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="boards")
+ * @ORM\Table(name="threads")
  */
 class Thread
 {
@@ -25,7 +25,14 @@ class Thread
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=3)
+     * @ORM\Column(type="string")
+     */
+    private $threadName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
     private $threadId;
 
@@ -36,10 +43,11 @@ class Thread
      */
     private $posts;
 
-    public function __construct(string $threadId)
+    public function __construct(string $threadName, string $threadId)
     {
-        $this->posts = new ArrayCollection();
-        $this->threadId = $threadId;
+        $this->posts      = new ArrayCollection();
+        $this->threadId   = $threadId;
+        $this->threadName = $threadName;
     }
 
     /**

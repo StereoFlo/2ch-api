@@ -30,63 +30,63 @@ class File
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $displayName;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $height;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $width;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $size;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $path;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $thumbnail;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $type;
 
-    public function __construct(Post $post, array $file)
+    public function __construct(Post $post, \Phpach\Thread\File $file)
     {
         $this->post = $post;
 
-        $this->displayName = (string) $file['displayname'] ?? null;
-        $this->height      = (int) $file['height'] ?? null;
-        $this->width       = (int) $file['width'] ?? null;
-        $this->size        = (int) $file['size'] ?? null;
-        $this->path        = (string) $file['path'] ?? null;
-        $this->thumbnail   = (string) $file['thumbnail'] ?? null;
-        $this->type        = (int) $file['type'] ?? null;
+        $this->displayName = $file->getDisplayName();
+        $this->height      = $file->getHeight();
+        $this->width       = $file->getWidth();
+        $this->size        = $file->getSize();
+        $this->path        = $file->getPath();
+        $this->thumbnail   = $file->getThumbnail();
+        $this->type        = null;
     }
 
     /**
