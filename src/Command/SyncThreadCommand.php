@@ -2,10 +2,13 @@
 
 namespace App\Command;
 
+use App\Entity\Thread\Post;
 use App\Repository\ThreadRepository;
+use Exception;
 use Phpach\Phpach;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SyncThreadCommand extends Command
@@ -29,22 +32,65 @@ class SyncThreadCommand extends Command
         $this->phpach      = $phpach;
     }
 
+    protected function configure(): void
+    {
+        $this->addArgument('type',InputOption::VALUE_REQUIRED, 'active or archived');
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $activeList = $this->threadRepos->getActive();
+        $type = $input->getArgument('type');
 
-        if (empty($activeList)) {
+        if ($type === 'active') {
+            $threads = $this->threadRepos->getActive();
+        }
+
+        if ($type === 'archived') {
+            $threads = $this->threadRepos->getArchived();
+        }
+
+
+        if (empty($threads)) {
             return 0;
         }
 
-        foreach ($activeList as $threadDb) {
+        $toSave = [];
+        foreach ($threads as $thread) {
+            $threadsTmp = null;
             try {
-                $threadTmp = $this->phpach->getThread($threadDb->getThreadName(), $threadDb->getThreadId());
-            } catch (\Exception $exception) {
-                continue;
+                $threadsTmp = $this->phpach->getThread($thread->getThreadName(), $thread->getThreadId());
+            } catch (Exception $exception) {
+                try {
+                    $threadsTmp = $this->phpach->getArchivedThread($thread->getThreadName(), date('Y-m-d', $thread->getTimestamp()), $thread->getThreadId());
+                    $thread->setArchived();
+                    $thread->setChecked();
+                } catch (Exception $exception) {
+                    $thread->setArchived();
+                    $thread->setChecked();
+                    $toSave[] = $thread;
+                    continue;
+                }
             }
+
+            foreach ($threadsTmp->getThreads() as $threadTmp) {
+                foreach ($threadTmp->getPosts() as $postTmp) {
+                    $postNum = $postTmp->getNum();
+                    $exists  = $thread->getPosts()->exists(function (int $key, Post $post) use ($postNum) {
+                        return $post->getNum() === $postNum;
+                    });
+
+                    if ($exists) {
+                        continue;
+                    }
+
+                    $post = new Post($thread, $postTmp);
+                    $thread->addPost($post);
+                }
+            }
+            $toSave[] = $thread;
         }
 
+        $this->threadRepos->save($toSave);
         return 0;
     }
 }

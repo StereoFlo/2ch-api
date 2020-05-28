@@ -42,26 +42,37 @@ class ImportThreadCommand extends Command
                     continue;
                 }
 
-
+                $toSave = [];
+                $count = 0;
                 foreach ($board->getThreads() as $thread) {
                     if ($this->threadRepos->getByThreadId($thread->getNum())) {
                         continue;
                     }
+
+                    $threadDb = new Thread($b->getId(), $thread->getNum(), $thread->getTimestamp());
+
                     try {
                         $tmpThread = $this->phpach->getThread($b->getId(), $thread->getNum());
                     } catch (Exception $exception) {
+                        $threadDb->setArchived();
+                        $toSave[] = $threadDb;
                         continue;
                     }
-                    $threadDb = new Thread($b->getId(), $thread->getNum());
+
                     foreach ($tmpThread->getThreads() as $item1) {
                         foreach ($item1->getPosts() as $item2) {
                             $post = new Thread\Post($threadDb, $item2);
                             $threadDb->addPost($post);
                         }
                     }
-                    $this->threadRepos->save($threadDb);
+                    $toSave[] = $threadDb;
+                    $count++;
+                    if ($count === 10) {
+                        $count = 0;
+                        $this->threadRepos->save($toSave);
+                        print "OK\n";
+                    }
                 }
-
             }
         }
 

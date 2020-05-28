@@ -44,18 +44,34 @@ class Thread
     private $isArchived;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default":0})
+     */
+    private $isChecked;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $timestamp;
+
+    /**
      * @var Collection<Post>
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Thread\Post", mappedBy="thread", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $posts;
 
-    public function __construct(string $threadName, string $threadId)
+    public function __construct(string $threadName, string $threadId, int $timestamp)
     {
         $this->posts      = new ArrayCollection();
         $this->threadId   = $threadId;
         $this->threadName = $threadName;
         $this->isArchived = false;
+        $this->isChecked  = false;
+        $this->timestamp  = $timestamp;
     }
 
     /**
@@ -95,12 +111,37 @@ class Thread
         return $this->threadId;
     }
 
+    public function setArchived(): void
+    {
+        $this->isArchived = true;
+    }
+
     /**
      * @return bool
      */
-    public function isArchived(): bool
+    public function getIsArchived(): bool
     {
         return $this->isArchived;
     }
 
+    public function setChecked(): void
+    {
+        $this->isChecked = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsChecked(): bool
+    {
+        return $this->isChecked;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
+    }
 }

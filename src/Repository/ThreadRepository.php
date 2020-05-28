@@ -17,9 +17,11 @@ class ThreadRepository
         $this->entityManager = $entityManager;
     }
 
-    public function save(Thread $thread)
+    public function save(array $threads)
     {
-        $this->entityManager->persist($thread);
+        foreach ($threads as $thread) {
+            $this->entityManager->persist($thread);
+        }
         $this->entityManager->flush();
     }
 
@@ -28,7 +30,15 @@ class ThreadRepository
      */
     public function getActive(): ?array
     {
-        return $this->entityManager->getRepository(Thread::class)->findBy(['isArchived' => false]);
+        return $this->entityManager->getRepository(Thread::class)->findBy(['isArchived' => false, 'isChecked' => false]);
+    }
+
+    /**
+     * @return Thread[]
+     */
+    public function getArchived(): ?array
+    {
+        return $this->entityManager->getRepository(Thread::class)->findBy(['isArchived' => true, 'isChecked' => false]);
     }
 
     public function getByThreadId(string $threadId): ?Thread
