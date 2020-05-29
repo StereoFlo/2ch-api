@@ -67,10 +67,10 @@ class ImportThreadCommand extends Command
                     }
                     $toSave[] = $threadDb;
                     $count++;
-                    if ($count === 10) {
+                    if ($count === 100) {
                         $count = 0;
-                        $toSave = [];
                         $this->threadRepos->save($toSave);
+                        $toSave = [];
                         print "OK\n";
                     }
                 }

@@ -93,8 +93,9 @@ class SyncThreadCommand extends Command
             $count++;
             if ($count === 100) {
                 $count = 0;
-                $toSave = [];
                 $this->threadRepos->save($toSave);
+                $toSave = [];
+                $output->writeln('saves 100');
             }
         }
 
