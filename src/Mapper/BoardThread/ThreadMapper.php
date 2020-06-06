@@ -27,7 +27,7 @@ class ThreadMapper
 
         $posts = [];
 
-        if ($threads[0]->count()) {
+        if (isset($threads[0]) && $threads[0]->count()) {
             foreach ($threads[0]->getPosts() as $post) {
                 $posts[] = [
                     'id'      => $post->getNumber(),
