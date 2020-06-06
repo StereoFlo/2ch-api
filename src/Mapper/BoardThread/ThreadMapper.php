@@ -34,6 +34,7 @@ class ThreadMapper
                     'num'     => $post->getNum(),
                     'name'    => $post->getName(),
                     'comment' => $post->getComment(),
+                    'parent'  => $post->getParent(),
                     'files'   => FileListMapper::map($post->getFiles()),
                 ];
             }
