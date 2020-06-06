@@ -754,12 +754,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/StereoFlo/phpach.git",
-                "reference": "82714f0310a981ff67804c00c439aa9626ae5f2d"
+                "reference": "89d5a959c0b3de131accf41b606d0e7993c51819"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StereoFlo/phpach/zipball/82714f0310a981ff67804c00c439aa9626ae5f2d",
-                "reference": "82714f0310a981ff67804c00c439aa9626ae5f2d",
+                "url": "https://api.github.com/repos/StereoFlo/phpach/zipball/89d5a959c0b3de131accf41b606d0e7993c51819",
+                "reference": "89d5a959c0b3de131accf41b606d0e7993c51819",
                 "shasum": ""
             },
             "require": {
@@ -783,7 +783,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-06-06T09:12:40+00:00"
+            "time": "2020-06-06T11:26:22+00:00"
         },
         {
             "name": "symfony/cache",
