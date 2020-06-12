@@ -10,6 +10,10 @@ show:
     resource: ../../src/Controller/Board.php
     type: annotation
 
+settings:
+    resource: ../../src/Controller/BoardSettings.php
+    type: annotation
+
 kernel:
     resource: ../../src/Kernel.php
     type: annotation

@@ -12,7 +12,7 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 /**
- * @Route("/v1/board/{id}", requirements={"id": ".*"}, methods={"GET"})
+ * @Route("/v1/board/{id}", requirements={"id": ".*"}, methods={"GET"}, requirements={"id": "\s+"})
  */
 class Board extends AbstractController
 {
