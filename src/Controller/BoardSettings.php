@@ -15,6 +15,7 @@ class BoardSettings extends AbstractController
     {
         $boards = $this->phpach->getAllBoards();
 
+        //todo уьрать в отдельный сервис
         $categoryTmp = null;
 
         foreach ($boards as $category) {
