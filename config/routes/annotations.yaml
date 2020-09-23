@@ -7,7 +7,7 @@ thread:
     type: annotation
 
 show:
-    resource: ../../src/Controller/Board.php
+    resource: ../../src/Controller/BoardShow.php
     type: annotation
 
 settings:
