@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/v1/board/{id}/settings", methods={"GET"}, requirements={"id": ".*"})
  */
-class BoardSettings extends AbstractController
+final class BoardSettings extends AbstractController
 {
     public function __invoke(BoardMapper $boardMapper, string $id)
     {

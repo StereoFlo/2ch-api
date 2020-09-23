@@ -14,7 +14,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 /**
  * @Route("/v1/board/{boardId}/{threadId}", requirements={"boardId": ".*", "threadId": "\d+"}, methods={"GET"})
  */
-class BoardThread extends AbstractController
+final class BoardThread extends AbstractController
 {
     /**
      * @throws ClientExceptionInterface
