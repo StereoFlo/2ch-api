@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/board/{boardId}/{threadId}", requirements={"boardId": ".*", "threadId": "\d+"}, methods={"GET"})
+ * @Route("/v1/board/{boardId}/{threadId}", requirements={"boardId": "\s+", "threadId": "\d+"}, methods={"GET"})
  */
 final class BoardThread extends AbstractController
 {
