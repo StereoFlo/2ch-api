@@ -10,14 +10,11 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use function in_array;
 
-class ExceptionListener implements EventSubscriberInterface
+final class ExceptionListener implements EventSubscriberInterface
 {
     public const DEBUG_ENVIRONMENTS = ['dev'];
 
-    /**
-     * @var string
-     */
-    private $environment;
+    private string $environment;
 
     public function __construct(string $environment)
     {
@@ -41,7 +38,7 @@ class ExceptionListener implements EventSubscriberInterface
         }
         $e = $event->getThrowable();
 
-        $event->setResponse(JsonResponse::create([
+        $event->setResponse(new JsonResponse([
             'error' => $e->getMessage(),
         ], 500));
     }
