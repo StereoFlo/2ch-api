@@ -18,7 +18,6 @@ abstract class AbstractController
 
     /**
      * @param array<mixed> $data
-     * @return JsonResponse
      */
     public function json(array $data): JsonResponse
     {
