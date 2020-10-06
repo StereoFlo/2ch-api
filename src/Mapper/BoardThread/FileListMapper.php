@@ -4,14 +4,20 @@ declare(strict_types = 1);
 
 namespace App\Mapper\BoardThread;
 
+use Phpach\Thread\File;
 use function array_map;
 
-class FileListMapper
+final class FileListMapper
 {
-    public static function map(?array $files): ?array
+    /**
+     * @param array<File>|null $files
+     *
+     * @return array<array<string, mixed>>
+     */
+    public static function map(?array $files): array
     {
         if (empty($files)) {
-            return null;
+            return [];
         }
 
         return array_map([FileMapper::class, 'map'], $files);

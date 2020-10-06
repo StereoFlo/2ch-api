@@ -7,8 +7,11 @@ namespace App\Mapper\BoardThread;
 use DomainException;
 use Phpach\Thread\Thread;
 
-class ThreadMapper
+final class ThreadMapper
 {
+    /**
+     * @return array<string, mixed>
+     */
     public static function map(Thread $thread): array
     {
         $res = [

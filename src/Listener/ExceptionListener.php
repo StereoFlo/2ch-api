@@ -24,6 +24,9 @@ class ExceptionListener implements EventSubscriberInterface
         $this->environment = $environment;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [

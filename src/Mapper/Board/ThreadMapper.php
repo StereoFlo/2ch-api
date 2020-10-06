@@ -9,11 +9,16 @@ use function array_column;
 use function array_map;
 use function array_multisort;
 
-class ThreadMapper
+final class ThreadMapper
 {
+    /**
+     * @param Thread[] $threads
+     *
+     * @return array<array<string, mixed>>
+     */
     public function mapCollection(array $threads): array
     {
-        $data = array_map([$this, 'doMapping'], $threads);
+        $data = array_map([$this, 'map'], $threads);
 
         $scores = array_column($data, 'score');
 
@@ -22,7 +27,10 @@ class ThreadMapper
         return $data;
     }
 
-    protected function doMapping(Thread $thread): array
+    /**
+     * @return array<string, mixed>
+     */
+    public function map(Thread $thread): array
     {
         return [
             'comment'    => $thread->getComment(),

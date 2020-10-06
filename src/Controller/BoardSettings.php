@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Mapper\BoardList\BoardMapper;
+use DomainException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class BoardSettings extends AbstractController
 {
-    public function __invoke(BoardMapper $boardMapper, string $id)
+    public function __invoke(BoardMapper $boardMapper, string $id): JsonResponse
     {
         $boards = $this->phpach->getAllBoards();
 
@@ -30,6 +31,10 @@ final class BoardSettings extends AbstractController
             }
         }
 
-        return JsonResponse::create($boardMapper->map($categoryTmp));
+        if (empty($categoryTmp)) {
+            throw new DomainException('list of categories ia empty');
+        }
+
+        return new JsonResponse($boardMapper->map($categoryTmp));
     }
 }

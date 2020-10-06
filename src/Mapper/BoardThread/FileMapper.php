@@ -6,8 +6,11 @@ namespace App\Mapper\BoardThread;
 
 use Phpach\Thread\File;
 
-class FileMapper
+final class FileMapper
 {
+    /**
+     * @return array<string, mixed>
+     */
     public static function map(File $file): array
     {
         return [

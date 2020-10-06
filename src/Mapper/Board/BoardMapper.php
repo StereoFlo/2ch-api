@@ -6,24 +6,19 @@ namespace App\Mapper\Board;
 
 use Phpach\Threads\Board;
 
-class BoardMapper
+final class BoardMapper
 {
-    /**
-     * @var ThreadMapper
-     */
-    private $threadMapper;
+    private ThreadMapper $threadMapper;
 
     public function __construct(ThreadMapper $threadMapper)
     {
         $this->threadMapper = $threadMapper;
     }
 
-    public function map(Board $board)
-    {
-        return $this->doMapping($board);
-    }
-
-    protected function doMapping(Board $board): array
+    /**
+     * @return array<string, mixed>
+     */
+    public function map(Board $board): array
     {
         return [
             'id'            => $board->getId(),

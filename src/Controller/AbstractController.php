@@ -8,10 +8,7 @@ use Phpach\Phpach;
 
 abstract class AbstractController
 {
-    /**
-     * @var Phpach
-     */
-    protected $phpach;
+    protected Phpach $phpach;
 
     public function __construct(Phpach $phpach)
     {
