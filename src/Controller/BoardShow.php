@@ -17,6 +17,6 @@ final class BoardShow extends AbstractController
     {
         $board = $this->phpach->getAllThreadsInBoard($id);
 
-        return JsonResponse::create($boardMapper->map($board));
+        return $this->json($boardMapper->map($board));
     }
 }

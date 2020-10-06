@@ -1,17 +1,18 @@
-list:
-    resource: ../../src/Controller/BoardList.php
-    type: annotation
-
 thread:
     resource: ../../src/Controller/BoardThread.php
+    type: annotation
+
+settings:
+    resource: ../../src/Controller/BoardSettings.php
     type: annotation
 
 show:
     resource: ../../src/Controller/BoardShow.php
     type: annotation
 
-settings:
-    resource: ../../src/Controller/BoardSettings.php
+
+list:
+    resource: ../../src/Controller/BoardList.php
     type: annotation
 
 kernel:

@@ -47,6 +47,9 @@
     "microsoft/tolerant-php-parser": {
         "version": "v0.0.20"
     },
+    "monolog/monolog": {
+        "version": "2.1.1"
+    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -109,18 +112,6 @@
     },
     "sabre/event": {
         "version": "5.1.2"
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "5.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "config/packages/sensio_framework_extra.yaml"
-        ]
     },
     "sensiolabs/security-checker": {
         "version": "4.0",
@@ -235,6 +226,24 @@
     },
     "symfony/mime": {
         "version": "v5.1.7"
+    },
+    "symfony/monolog-bridge": {
+        "version": "v5.1.7"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "d7249f7d560f6736115eee1851d02a65826f0a56"
+        },
+        "files": [
+            "config/packages/dev/monolog.yaml",
+            "config/packages/prod/deprecations.yaml",
+            "config/packages/prod/monolog.yaml",
+            "config/packages/test/monolog.yaml"
+        ]
     },
     "symfony/options-resolver": {
         "version": "v5.1.7"

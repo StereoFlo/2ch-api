@@ -1,0 +1,21 @@
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_all.log"
+            level: debug
+            channels: ["!event", '!console', '!php', "!request"]
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!console"]
+        php:
+            path: "%kernel.logs_dir%/%kernel.environment%_php.log"
+            type: stream
+            level: debug
+            channels: ["php"]
+        request:
+            path: "%kernel.logs_dir%/%kernel.environment%_request.log"
+            type: stream
+            level: info
+            channels: ["request"]
