@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/v1/board/{id}", methods={"GET"}, requirements={"id": "\s+"})
+ * @Route("/v1/board/{id}", methods={"GET"}, requirements={"id": "[a-zA-Z]+"})
  */
 final class BoardShow extends AbstractController
 {
