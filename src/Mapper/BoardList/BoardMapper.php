@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Mapper\BoardList;
 
 use Phpach\Boards\Board;
+use function array_map;
 
 class BoardMapper
 {
@@ -20,7 +23,7 @@ class BoardMapper
     {
         return [
             'id'   => $board->getId(),
-            'name' => $board->getName()
+            'name' => $board->getName(),
         ];
     }
 }

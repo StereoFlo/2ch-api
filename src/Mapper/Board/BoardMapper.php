@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Mapper\Board;
 
 use Phpach\Threads\Board;
@@ -26,7 +28,7 @@ class BoardMapper
         return [
             'id'            => $board->getId(),
             'threads_count' => $board->count(),
-            'threads'       => $this->threadMapper->mapCollection($board->getThreads())
+            'threads'       => $this->threadMapper->mapCollection($board->getThreads()),
         ];
     }
 }

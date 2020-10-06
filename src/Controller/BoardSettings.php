@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controller;
 
 use App\Mapper\BoardList\BoardMapper;
@@ -22,6 +24,7 @@ final class BoardSettings extends AbstractController
             foreach ($category->getBoards() as $board) {
                 if ($board->getId() === $id) {
                     $categoryTmp = $board;
+
                     break;
                 }
             }

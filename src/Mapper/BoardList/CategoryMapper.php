@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Mapper\BoardList;
 
 use Phpach\Boards\Category;
+use function array_map;
 
 class CategoryMapper
 {
@@ -31,7 +34,7 @@ class CategoryMapper
         return [
             'name'        => $category->getName(),
             'board_count' => $category->count(),
-            'boards'      => $this->boardMapper->mapCollection($category->getBoards())
+            'boards'      => $this->boardMapper->mapCollection($category->getBoards()),
         ];
     }
 }

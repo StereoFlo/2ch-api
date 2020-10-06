@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Mapper\BoardThread;
+declare(strict_types = 1);
 
+namespace App\Mapper\BoardThread;
 
 use function array_map;
 
